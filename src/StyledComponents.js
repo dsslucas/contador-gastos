@@ -30,10 +30,9 @@ export const GlobalStyle = createGlobalStyle`
 //COntainer
 export const Container = styled.div`
   max-width: 1360px;
-
+  padding-bottom: 4px;
   margin-right: auto;
   margin-left: auto;
-  padding: 0;
   box-sizing: border-box;
 
   &:before, &:after{
@@ -87,8 +86,8 @@ export const Column = styled.div`
 `
 export const CardWrapper = styled.div`
   overflow: hidden;
-  padding-bottom: 5px;
-  margin: 0px auto 0;
+
+ 
 
   font-family: Quicksand, arial, sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
@@ -177,13 +176,12 @@ export const CardOptionsNote = styled.small`
 
 export const CardOptions = styled.ul`
   padding: 0;
-  margin: 16px 0 8px;
+  margin: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  width: 100%;
   list-style-type: none;
 
 
@@ -198,15 +196,15 @@ export const CardOptionsItem = styled.li`
 
 export const CardButton = styled.button`
   display: block;
-  width: 100%;
-  padding: 12px 0;
+
+
   font-family: inherit;
-  font-size: 14px;
+  font-size: 30px;
   font-weight: 700;
   color: #fff;
   background-color: #273746;
-  border: 0;
-  border-radius: 35px;
+
+  border-radius: 50%;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
