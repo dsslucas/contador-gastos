@@ -14,16 +14,15 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 8px;
     text-align: center;
   }
-  h1{
+  h2, span{
     margin: 10px;
   }
 
   @media only screen and (max-width: 768px){
     body{
-      overflow: scroll;
-      height: auto;
-      margin-top: 20px;
-      margin-bottom: 20px;
+
+      margin-top: 8px;
+      margin-bottom: 8px;
     }
   }
 `
@@ -34,7 +33,7 @@ export const Container = styled.div`
 
   margin-right: auto;
   margin-left: auto;
-  padding: 10px;
+  padding: 0;
   box-sizing: border-box;
 
   &:before, &:after{
@@ -129,18 +128,11 @@ export const CardText = styled.span`
 export const CardFieldset = styled.fieldset`
   position: relative;
   padding: 0;
-  margin-top: 5px;
   border: 0;
   text-align: center;
 
 
-  & + & {
-    margin-top: 24px;
-  }
 
-  &:nth-last-of-type(2) {
-    margin-top: 32px;
-  }
 
   &:last-of-type {
     text-align: center;
