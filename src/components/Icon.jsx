@@ -25,14 +25,8 @@ import React from "react";
 export default props => {
 
     return (
-        <CardWrapper columns={props.columns ? props.columns : '250px'}>
-            <CardHeader>
-                <CardHeading>{props.title}</CardHeading>
-            </CardHeader>
+        <Container>
 
-            <CardBody>
-                <CardText>Valor</CardText>
-            </CardBody>
-        </CardWrapper>
+        </Container>
     )
 }

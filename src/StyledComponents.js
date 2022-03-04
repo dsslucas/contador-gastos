@@ -17,6 +17,14 @@ export const GlobalStyle = createGlobalStyle`
   h1{
     margin: 10px;
   }
+
+  @media only screen and (max-width: 768px){
+    body{
+      overflow: scroll;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
 `
 
 //COntainer
@@ -46,6 +54,7 @@ export const Row = styled.div`
   float: left;
   box-sizing: border-box;
 
+
   &:before, &:after{
     content: "";
     display: table;
@@ -54,6 +63,7 @@ export const Row = styled.div`
   &:after{
     clean: both;
   }
+
 `
 
 //Colunas
@@ -66,11 +76,16 @@ export const Column = styled.div`
   background: ${props => props.color};
 
   @media only screen and (min-width: 768px){
-    width: ${props => (props.columnNumber ? props.columnNumber / 12 * 100 : '8.33')}%;
+    width: ${props => (props.columnNumber ? props.columnNumber / 12 * 100 : 8.33)}%;
+  }
+
+  @media only screen and (max-width: 768px){
+
+    width: ${props => (props.xs / 12 * 100)}%;
+
   }
 
 `
-
 export const CardWrapper = styled.div`
   overflow: hidden;
   padding-bottom: 5px;
@@ -80,7 +95,9 @@ export const CardWrapper = styled.div`
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
   border-radius: 5px;
 
-
+  @media only screen and (max-width: 768px){
+    width: 100%
+  }
 
 `;
 
@@ -145,30 +162,11 @@ export const CardIcon = styled.span`
   cursor: pointer;
   opacity: .25;
   transition: opacity .25s ease-in;
+  font-size: 50px;
 
   &:hover {
     opacity: .95;
   }
-
-  ${props =>
-    props.big &&
-    css`
-      font-size: 26px;
-    `}
-
-  ${props =>
-    props.eye &&
-    css`
-      position: absolute;
-      top: 8px;
-      right: 0;
-    `}
-
-  ${props =>
-    props.small &&
-    css`
-      font-size: 14px;
-    `}
 `;
 
 export const CardOptionsNote = styled.small`

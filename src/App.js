@@ -15,10 +15,11 @@ function App() {
       </Row>
 
       <Row>
-        <Column columnNumber="6" color="green">
+        <Column columnNumber="6" xs="12" color="green">
           <Dashboard title="Dashboard" content="Análise" />
         </Column>
-        <Column columnNumber="6" color="yellow">
+
+        <Column columnNumber="6" xs="12" color="yellow">
           <Input title="Entrada de dados" content="Informe os dados" />
         </Column>
       </Row>

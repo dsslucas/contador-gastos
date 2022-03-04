@@ -20,25 +20,23 @@ export default props => {
             </Row>
 
             <Row>
-                <Column columnNumber="12">
-                    <Card title="Gasto total" columns="12"/>
-                </Column>
-                <Column columnNumber="3">
-                <Card title="Alimentação"/>
-                </Column>
-                <Column columnNumber="3">
-                    <Card title="Bebidas"/>
-                </Column>
-                <Column columnNumber="3">
-                    <Card title="Compras"/>
-                </Column>
-                <Column columnNumber="3">
-                    <Card title="Viagens"/>
+                <Column columnNumber="12" xs="12">
+                    <Card title="Gasto total" columns="12" />
                 </Column>
 
+                <Column columnNumber="3" xs="6">
+                    <Card title="Comidas" />
+                </Column>
+                <Column columnNumber="3" xs="6">
+                    <Card title="Bebidas" />
+                </Column>
+                <Column columnNumber="3" xs="6">
+                    <Card title="Compras" />
+                </Column>
+                <Column columnNumber="3" xs="6">
+                    <Card title="Viagens" />
+                </Column>
             </Row>
         </Container>
-
-
     )
 }
