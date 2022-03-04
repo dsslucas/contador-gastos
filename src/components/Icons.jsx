@@ -19,6 +19,10 @@ import {
     CardLink
 } from '../StyledComponents';
 
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+
 import React from "react";
 
 
@@ -27,6 +31,12 @@ export default props => {
     return (
         <Container>
 
+            <CardOptionsItem>
+                <CardIcon>
+                    <FontAwesomeIcon icon={props.icon} color={props.color}/>
+                </CardIcon>
+
+            </CardOptionsItem>
         </Container>
     )
 }

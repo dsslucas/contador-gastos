@@ -16,7 +16,8 @@ import {
     CardOptions,
     CardOptionsNote,
     CardButton,
-    CardLink
+    CardLink,
+    CartBackground
 } from '../StyledComponents';
 
 import React from "react";
@@ -25,14 +26,19 @@ import React from "react";
 export default props => {
 
     return (
-        <CardWrapper columns={props.columns ? props.columns : '250px'}>
+        <CardWrapper
+            columns={props.columns ? props.columns : '250px'}
+            color={props.color}
+        >
             <CardHeader>
                 <CardHeading>{props.title}</CardHeading>
             </CardHeader>
 
-            <CardBody>
-                <CardText>Valor</CardText>
+            <CardBody color={props.color}>
+                <CardText>R$ [BLABLA]</CardText>
             </CardBody>
         </CardWrapper>
+
+
     )
 }

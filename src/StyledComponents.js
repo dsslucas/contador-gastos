@@ -2,15 +2,15 @@ import styled, { createGlobalStyle, css } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
   body {
-    background: dodgerblue;
     display: flex;
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
-    height: 100vh
+    height: 100vh;
+    background: #212F3D;
   }
   div{
-    background: white;
+    background: #D7DBDD;
     border-radius: 8px;
     text-align: center;
   }
@@ -21,6 +21,7 @@ export const GlobalStyle = createGlobalStyle`
   @media only screen and (max-width: 768px){
     body{
       overflow: scroll;
+      height: auto;
       margin-top: 20px;
       margin-bottom: 20px;
     }
@@ -30,11 +31,10 @@ export const GlobalStyle = createGlobalStyle`
 //COntainer
 export const Container = styled.div`
   max-width: 1360px;
-  padding-right: 15px;
-  padding-left: 15px;
+
   margin-right: auto;
   margin-left: auto;
-
+  padding: 10px;
   box-sizing: border-box;
 
   &:before, &:after{
@@ -95,6 +95,8 @@ export const CardWrapper = styled.div`
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
   border-radius: 5px;
 
+  background: ${props => props.color};
+
   @media only screen and (max-width: 768px){
     width: 100%
   }
@@ -104,6 +106,7 @@ export const CardWrapper = styled.div`
 export const CardHeader = styled.header`
   padding-top: 8px;
   padding-bottom: 8px;
+  background: ${props => props.color}
 `;
 
 export const CardHeading = styled.h1`
@@ -115,17 +118,21 @@ export const CardHeading = styled.h1`
 export const CardBody = styled.div`
   padding-right: 8px;
   padding-left: 8px;
+  padding-bottom: 8px;
+  background: ${props => props.color};
 `;
 
 export const CardText = styled.span`
-  background: yellow
+
 `
 
 export const CardFieldset = styled.fieldset`
   position: relative;
   padding: 0;
-  margin: 0;
+  margin-top: 5px;
   border: 0;
+  text-align: center;
+
 
   & + & {
     margin-top: 24px;
@@ -149,23 +156,21 @@ export const CardInput = styled.input`
   border-right: 0;
   border-bottom: 1px solid #ddd;
   border-left: 0;
-  transition: border-bottom-color 0.25s ease-in;
 
-  &:focus {
-    border-bottom-color: #e5195f;
-    outline: 0;
-  }
+  text-align: center;
 `;
 
 export const CardIcon = styled.span`
-  color: #666;
+  color: black;
   cursor: pointer;
-  opacity: .25;
+  opacity: .65;
   transition: opacity .25s ease-in;
-  font-size: 50px;
+  font-size: 25px;
+
+  background: ${props => props.background};
 
   &:hover {
-    opacity: .95;
+    opacity: .99;
   }
 `;
 
@@ -188,12 +193,15 @@ export const CardOptions = styled.ul`
   justify-content: center;
   width: 100%;
   list-style-type: none;
+
+
 `;
 
 export const CardOptionsItem = styled.li`
   &:nth-of-type(n + 2) {
     margin-left: 16px;
   }
+
 `;
 
 export const CardButton = styled.button`
@@ -204,7 +212,7 @@ export const CardButton = styled.button`
   font-size: 14px;
   font-weight: 700;
   color: #fff;
-  background-color: #e5195f;
+  background-color: #273746;
   border: 0;
   border-radius: 35px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
