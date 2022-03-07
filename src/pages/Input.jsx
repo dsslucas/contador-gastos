@@ -19,39 +19,43 @@ import { faCab } from '@fortawesome/free-solid-svg-icons';
 export class Input extends Component {
 
     state = {
-        valor: 0
+        valor: 0,
+        opcaoBotao: 0
     }
 
     //Registra no estado o valor informado
     change = (e) => {
         e.preventDefault();
-
         //console.log("Entrei no e.target...")
-
         //console.log("Valor:", this.state.valor)
-
         this.setState({ valor: e.target.value })
         //console.log(`APÓS A ALTERAÇÃO> ${this.state.valor}`)
-
         //console.log(e)
-
     }
 
-    onTrigger= (event) => {
+    //Envia o formulário
+    onTrigger = (event) => {
         event.preventDefault();
 
-        if(event.key === "Enter"){
-            console.log("ENTREI NO ENTER")
-        }
-
-        console.log("Houve alteração", this.state.valor)
+        //console.log("Houve alteração", this.state.valor)
         this.props.parentCallback(this.state.valor)
-        console.log(event)
-
+        //console.log(event)
     }
+
+    //Resposta do botão pressionado em Icons
+    respostaCliqueBotao = (e) => {
+        console.log("Entrei aqui")
+        console.log(e)
+        this.setState({opcaoBotao: e})
+        console.log(`BOTÃO SELECIONADO (POR ID): ${this.state.opcaoBotao}`)
+    }
+
+
 
     render() {
         const { valor } = this.state
+
+        console.log("OPÇÃO (FORA DA FUNÇÃO):", this.state.opcaoBotao)
         return (
 
             <Container>
@@ -69,23 +73,22 @@ export class Input extends Component {
                                 name="valor"
                                 onChange= {this.change}
                                 required
-                                onKeyPress={(e) => {e.key === 'Enter' ? alert("É necessário informar a categoria.") : console.log("Não entrou no Enter")}}
+                                onKeyPress={(e) => {e.key === 'Enter' ? e.preventDefault() : console.log("Não entrou no Enter")}}
 
                             />
                             {valor}
 
                             <CardOptionsNote>Categoria</CardOptionsNote>
                             <CardOptions>
-                                <Icons icon={faBurger} color="red" type="submit" />
-                                <Icons icon={faBeer} color="yellow" type="submit" />
-                                <Icons icon={faBagShopping} color="orange" type="submit" />
-                                <Icons icon={faCab} color="#7FB3D5" type="submit" />
+                                <Icons icon={faBurger} color="red" type="submit" id="1" resposta = {this.respostaCliqueBotao}
+                                />
+                                <Icons icon={faBeer} color="yellow" type="submit" id="2" resposta = {this.respostaCliqueBotao}/>
+                                <Icons icon={faBagShopping} color="orange" type="submit" id="3" resposta = {this.respostaCliqueBotao}/>
+                                <Icons icon={faCab} color="#7FB3D5" type="submit" id="4" resposta = {this.respostaCliqueBotao}/>
                             </CardOptions>
 
                         </CardFieldset>
                     </form>
-
-
                 </Row>
 
             </Container>

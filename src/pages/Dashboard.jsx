@@ -24,7 +24,7 @@ export class Dashboard extends Component {
 
                 <Row>
                     <Column columnNumber="12" xs="12">
-                        <Card title="Gasto total" columns="12" color="#1E8449" value={this.props.value}/>
+                        <Card title="Gasto total" columns="12" color="#1E8449" value={this.props.valueTotal}/>
                     </Column>
 
                     <Column columnNumber="6" xs="6">

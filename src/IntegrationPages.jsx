@@ -12,7 +12,12 @@ export class IntegrationPages extends Component {
 
     //ESTADOS
     state = {
+        salario: 0,
         dinheiroTotal: 0,
+        valorComida: 0,
+        valorBebida: 0,
+        valorCompra: 0,
+        valorViagem: 0
     }
 
     handleCallback = (novoValor) => {
@@ -33,7 +38,7 @@ export class IntegrationPages extends Component {
 
                     <Row>
                         <Column columnNumber="6" xs="12">
-                            <Dashboard title="Análise" parentCallback = {this.handleCallback} value={this.state.dinheiroTotal}/>
+                            <Dashboard title="Análise" parentCallback = {this.handleCallback} valueTotal={this.state.dinheiroTotal}/>
                         </Column>
 
                         <Column columnNumber="6" xs="12">
