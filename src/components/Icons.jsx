@@ -13,9 +13,9 @@ import React, { Component } from "react";
 export class Icons extends Component {
 
     botaoSelecionado(e){
-        console.log("AMOR EU SOU SEU DEPENDENTE")
-        console.log(e)
-        console.log(this.props.id)
+        //console.log("AMOR EU SOU SEU DEPENDENTE")
+        //console.log(e)
+        //console.log(this.props.id)
         this.props.resposta(this.props.id)
         //e.preventDefault()
     }

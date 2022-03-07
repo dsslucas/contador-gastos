@@ -13,6 +13,18 @@ import { useState } from 'react';
 
 export class Dashboard extends Component {
 
+    //Estados
+    state = {
+        valorComida: 0,
+        valorBebida: 0,
+        valorCompra: 0,
+        valorViagem: 0
+    }
+
+    //Soma dos valores por categoria, vindos do Input.jsx
+    somaValoresPorCategoria(id, valor){
+        console.log(`ID ${id}, VALOR ${valor}`)
+    }
 
     render() {
         return (
@@ -24,7 +36,7 @@ export class Dashboard extends Component {
 
                 <Row>
                     <Column columnNumber="12" xs="12">
-                        <Card title="Gasto total" columns="12" color="#1E8449" value={this.props.valueTotal}/>
+                    <Card title="Gasto total" columns="12" color="#1E8449" value={this.props.valueTotal}/>
                     </Column>
 
                     <Column columnNumber="6" xs="6">

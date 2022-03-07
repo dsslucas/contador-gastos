@@ -16,10 +16,13 @@ import { faBeer, faBurger } from "@fortawesome/free-solid-svg-icons";
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import { faCab } from '@fortawesome/free-solid-svg-icons';
 
+//FAZER A SOMA DOS VALORES
+
 export class Input extends Component {
 
     state = {
-        valor: 0,
+        valorJaInformado: 0,
+        valorAtual: 0,
         opcaoBotao: 0
     }
 
@@ -28,7 +31,7 @@ export class Input extends Component {
         e.preventDefault();
         //console.log("Entrei no e.target...")
         //console.log("Valor:", this.state.valor)
-        this.setState({ valor: e.target.value })
+        this.setState({ valorAtual: e.target.value })
         //console.log(`APÓS A ALTERAÇÃO> ${this.state.valor}`)
         //console.log(e)
     }
@@ -38,24 +41,44 @@ export class Input extends Component {
         event.preventDefault();
 
         //console.log("Houve alteração", this.state.valor)
-        this.props.parentCallback(this.state.valor)
+        this.props.parentCallback(this.state.valorAtual)
         //console.log(event)
     }
 
     //Resposta do botão pressionado em Icons
     respostaCliqueBotao = (e) => {
-        console.log("Entrei aqui")
-        console.log(e)
+        //console.log("Entrei aqui")
+        //console.log(e)
         this.setState({opcaoBotao: e})
-        console.log(`BOTÃO SELECIONADO (POR ID): ${this.state.opcaoBotao}`)
+        //console.log(`BOTÃO SELECIONADO (POR ID): ${this.state.opcaoBotao}`)
+        this.somaValores(e)
     }
 
+    somaValores(option){
+        console.log("Entrei na função de Soma dos Valores. O valor é", option)
+        console.log("VALOR dentro do SOMAVALORES: ", this.state.valorAtual)
 
+        switch(option){
+            case '1':
+                console.log("Alimentação")
+
+                break
+            case '2':
+                console.log("Bebida")
+                break;
+            case '3':
+                console.log("Compras")
+                break;
+            case '4':
+                console.log("Viagem")
+                break;
+        }
+    }
 
     render() {
         const { valor } = this.state
 
-        console.log("OPÇÃO (FORA DA FUNÇÃO):", this.state.opcaoBotao)
+        //console.log("OPÇÃO (FORA DA FUNÇÃO):", this.state.opcaoBotao)
         return (
 
             <Container>
