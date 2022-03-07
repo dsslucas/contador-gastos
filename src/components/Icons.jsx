@@ -8,22 +8,25 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import React from "react";
+import React, {Component} from "react";
 
-export default props => {
+export class Icons extends Component {
 
-    return (
-        <Container>
-
-            <CardOptionsItem>
-                <CardIcon>
-                    <CardButton type="submit">
-                        <FontAwesomeIcon icon={props.icon} color={props.color} />
-                    </CardButton>
-
-                </CardIcon>
-
-            </CardOptionsItem>
-        </Container>
-    )
+    render(){
+        return (
+            <Container>
+    
+                <CardOptionsItem>
+                    <CardIcon>
+                        <CardButton type={this.props.type} onClick={() => console.log("Cliquei aqui")}>
+                            <FontAwesomeIcon icon={this.props.icon} color={this.props.color} />
+                        </CardButton>
+    
+                    </CardIcon>
+    
+                </CardOptionsItem>
+            </Container>
+        )
+    }
+   
 }
