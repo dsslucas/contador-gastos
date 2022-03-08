@@ -27,9 +27,10 @@ export class IntegrationPages extends Component {
 
     //Callback de Valor. Vai ser descontinuada
     handleCallback = (novoValor) => {
+        console.log("NOVO VALOR DENTRO DO CALLBACK: ", novoValor)
         console.log("Entrei no Callback")
         this.setState({ valorInformado: novoValor })
-        console.log(`O QUE ESTÁ CHEGANDO NO CALLBACK: ${this.state.valorInformado}`)
+        //console.log(`O QUE ESTÁ CHEGANDO NO CALLBACK: ${this.state.valorInformado}`)
     }
 
     //Resposta do botão pressionado em Icons. Aqui é definido o ID
@@ -43,8 +44,8 @@ export class IntegrationPages extends Component {
 
         //Finaliza o formulário
         if(this.state.id != e || this.state.id === e){
-            console.log("Aqui deve finalizar o formulário")
-            console.log(`VALOR ALTERADO: ${this.state.valorInformado}`)
+            //console.log("Aqui deve finalizar o formulário")
+            //console.log(`VALOR ALTERADO: ${this.state.valorInformado}`)
 
         }
 

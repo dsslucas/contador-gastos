@@ -34,6 +34,9 @@ export class Input extends Component {
         console.log("SAÍ DO CHANGE")
         //console.log(e)
 
+        //Retorna para a Integration
+        this.props.parentCallback(this.state.valorAtual)
+
     }
 
     //Envia o formulário
@@ -50,7 +53,7 @@ export class Input extends Component {
     }
 
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         console.log("Tive uma atualização aqui")
         console.log(`(NO USE EFFECT) Valor: ${this.state.valorAtual}`)
     }
