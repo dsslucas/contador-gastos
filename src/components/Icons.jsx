@@ -15,7 +15,8 @@ export class Icons extends Component {
     botaoSelecionado(e){
         //console.log("AMOR EU SOU SEU DEPENDENTE")
         //console.log(e)
-        //console.log(this.props.id)
+        //console.log("OCORRÊNCIA")
+        //console.log(`RESPOSTA EM ICONS.JSX: ${this.props.id}`)
         this.props.resposta(this.props.id)
         //e.preventDefault()
     }
@@ -29,6 +30,7 @@ export class Icons extends Component {
                     type={this.props.type}
                     onClick={e => this.botaoSelecionado(e)}
                     id={this.props.id}
+                    required
                 >
                     <FontAwesomeIcon icon={this.props.icon} color={this.props.color} />
                 </CardButton>
