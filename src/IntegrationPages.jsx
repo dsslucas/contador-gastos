@@ -27,35 +27,34 @@ export class IntegrationPages extends Component {
 
     //Callback de Valor. Vai ser descontinuada
     handleCallback = (novoValor) => {
-        console.log("NOVO VALOR DENTRO DO CALLBACK: ", novoValor)
-        console.log("Entrei no Callback")
-        this.setState({ valorInformado: novoValor })
+
+        //console.log("NOVO VALOR DENTRO DO CALLBACK: ", novoValor)
+
+        this.setState({valorInformado: novoValor})
+
         //console.log(`O QUE ESTÁ CHEGANDO NO CALLBACK: ${this.state.valorInformado}`)
     }
 
     //Resposta do botão pressionado em Icons. Aqui é definido o ID
     respostaCliqueBotao = (e) => {
-        //console.log("Entrei aqui")
-        //console.log(`ID que chega na função: ${e}`)
+        console.log("Entrei na resposta do botão")
         this.setState({ id: e })
-        //console.log(`DENTRO DA FUNÇÃO: BOTÃO SELECIONADO (POR ID): ${this.state.id}`)
-        //this.somaValores(e)
-        //this.calculoValorPorCategoria()
 
         //Finaliza o formulário
         if(this.state.id != e || this.state.id === e){
             //console.log("Aqui deve finalizar o formulário")
             //console.log(`VALOR ALTERADO: ${this.state.valorInformado}`)
-
+            this.calculoValorPorCategoria(this.state.id)
         }
-
     }
 
-    calculoValorPorCategoria(option, valor) {
-        console.log(`VALOR (NA FUNÇÃO DE CÁLCULO): ${valor}`)
+    calculoValorPorCategoria(option) {
+
+        console.log(`VALOR (NA FUNÇÃO DE CÁLCULO): ${this.state.valorInformado}`)
         switch (option) {
             case '1':
                 console.log("Alimentação")
+                this.setState({valorComida: this.state.valorComida + this.state.valorInformado})
                 break
             case '2':
                 console.log("Bebida")
@@ -73,23 +72,15 @@ export class IntegrationPages extends Component {
     
     onTrigger = (event) => {
         event.preventDefault();
-
-        console.log("Houve alteração", this.state.valorInformado)
-
-        //Retorna para a Integration
-        //this.props.parentCallback(this.state.valorAtual)
-        //console.log(event)
-        //this.props.id(event)
-        //console.log(event)
+        console.log("Formulário enviado!")
     }
 
     render() {
         const idGerado = this.state.id
         const valorAtual = this.state.valorInformado
 
-        console.log("(NA PRINCIPAL) VALOR: ", this.state.valorInformado)
-
-        //this.calculoValorPorCategoria(idGerado, valorAtual)
+        //console.log(`(NA PÁGINA PRINCIPAL, LONGE DO CALLBACK) Valor: ${valorAtual}`)
+        console.log(`Valor do rango: ${this.state.valorComida}`)
         return (
             <Container>
                 <GlobalStyle />
@@ -116,17 +107,11 @@ export class IntegrationPages extends Component {
                                         <Icons icon={faBagShopping} color="orange" type="submit" id="3" resposta={this.respostaCliqueBotao} />
                                         <Icons icon={faCab} color="#7FB3D5" type="submit" id="4" resposta={this.respostaCliqueBotao} />
                                     </CardOptions>
-
                                 </CardFieldset>
-
                             </form>
-
                         </Column>
                     </Row>
-
                 </CardWrapper>
-
-
             </Container>
         )
     }

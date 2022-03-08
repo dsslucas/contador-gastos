@@ -18,58 +18,19 @@ import { useEffect } from 'react';
 export class Input extends Component {
 
     state = {
-        valorJaInformado: 0,
+        valorAnterior: '',
         valorAtual: '',
         opcaoBotao: 0
     }
 
-    //Registra no estado o valor informado
-    change = (e) => {
-        //e.preventDefault();
-        console.log("")
-        console.log("Entrei na função CHANGE em Icons.jsx")
-        console.log("Valor:", this.state.valorAtual)
+    handleInputChange = (e) => {
         this.setState({ valorAtual: e.target.value })
-
-        console.log("SAÍ DO CHANGE")
-        //console.log(e)
-
-        //Retorna para a Integration
-        this.props.parentCallback(this.state.valorAtual)
-
+        this.props.parentCallback(e.target.value)
     }
-
-    //Envia o formulário
-    onTrigger = (event) => {
-        event.preventDefault();
-
-        console.log("Houve alteração", this.state.valorAtual)
-
-        //Retorna para a Integration
-        this.props.parentCallback(this.state.valorAtual)
-        //console.log(event)
-        //this.props.id(event)
-        //console.log(event)
-    }
-
-
-    componentDidUpdate() {
-        console.log("Tive uma atualização aqui")
-        console.log(`(NO USE EFFECT) Valor: ${this.state.valorAtual}`)
-    }
-
-
-    /*
-    useEffect(() => {
-        console.log("Entrei no UseEffect")
-        this.props.parentCallback(this.state.valorAtual)
-    }, [this.state.valorAtual]);
-*/
 
     render() {
         const { valorAtual } = this.state
-        console.log("(FORA DA FUNÇÃO) VALOR INFORMADO:", this.state.valorAtual)
-
+        //console.log("(FORA DA FUNÇÃO) VALOR INFORMADO:", this.state.valorAtual)
 
         return (
 
@@ -86,8 +47,10 @@ export class Input extends Component {
                             type={this.props.tipo}
                             name="valor"
                             value={this.state.valorAtual}
-                            onChange={this.change}
+                            onChange={this.handleInputChange}
                             required
+                            onSubmit={this.onTrigger}
+
                             onKeyPress={(e) => { e.key === 'Enter' ? e.preventDefault() : console.log("Não entrei no enter") }}
                         />
                         {valorAtual}
