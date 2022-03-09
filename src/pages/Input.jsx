@@ -19,13 +19,47 @@ export class Input extends Component {
 
     state = {
         valorAnterior: '',
-        valorAtual: '',
-        opcaoBotao: 0
+        valorAtual: ''
     }
 
     handleInputChange = (e) => {
         this.setState({ valorAtual: e.target.value })
-        this.props.parentCallback(e.target.value)
+        this.props.parentCallback(e.target.value, this.props.id)
+    }
+
+    renderizacaoCondicional() {
+        if (this.props.id == '0') {
+            return (
+                <CardInput
+                    placeholder={this.props.nomeInput}
+                    type={this.props.tipo}
+                    name="valor"
+                    value={this.props.conteudo}
+                    onChange={this.handleInputChange}
+                    onSubmit={this.onTrigger}
+                    required={this.props.id != '5' ? true : false}
+                    disabled
+
+
+                    onKeyPress={(e) => { e.key === 'Enter' ? e.preventDefault() : console.log("Não entrei no enter") }}
+                />
+            )
+        }
+        else {
+            return (
+                <CardInput
+                    placeholder={this.props.nomeInput}
+                    type={this.props.tipo}
+                    name="valor"
+                    value={this.props.conteudo}
+                    onChange={this.handleInputChange}
+                    onSubmit={this.onTrigger}
+                    required={this.props.id != '5' ? true : false}
+
+
+                    onKeyPress={(e) => { e.key === 'Enter' ? e.preventDefault() : console.log("Não entrei no enter") }}
+                />)
+        }
     }
 
     render() {
@@ -37,27 +71,25 @@ export class Input extends Component {
                 <GlobalStyle />
                 <Row>
                     <h2>{this.props.title}</h2>
+                    <span>ID {this.props.id}</span>
+                    <span>VALOR NO INPUT {valorAtual}</span>
+
+
                 </Row>
 
-                <Row>
-                    <CardFieldset>
-                        <CardOptionsNote>Informe o valor gasto e selecione uma categoria</CardOptionsNote>
+                <CardOptionsNote>{this.props.texto}</CardOptionsNote>
+                <CardInput
+                    placeholder={this.props.nomeInput}
+                    type={this.props.tipo}
+                    name="valor"
+                    value={this.props.conteudo}
+                    onChange={this.handleInputChange}
+                    onSubmit={this.onTrigger}
+                    required={this.props.id != '5' ? true : false}
+                    onKeyPress={(e) => { e.key === 'Enter' ? e.preventDefault() : console.log("Não entrei no enter") }}
+                />
 
-                        <CardInput
-                            placeholder={this.props.nomeInput}
-                            type={this.props.tipo}
-                            name="valor"
-                            value={this.props.conteudo}
-                            onChange={this.handleInputChange}
-                            onSubmit={this.onTrigger}
-                            required={this.props.id === '5' ? false : true}
 
-                            onKeyPress={(e) => { e.key === 'Enter' ? e.preventDefault() : console.log("Não entrei no enter") }}
-                        />
-                        {valorAtual}
-
-                    </CardFieldset>
-                </Row>
             </Container>
 
         )

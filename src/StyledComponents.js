@@ -20,9 +20,10 @@ export const GlobalStyle = createGlobalStyle`
 
   @media only screen and (max-width: 768px){
     body{
-
+      height: auto;
       margin-top: 8px;
       margin-bottom: 8px;
+      overflow: scroll;
     }
   }
 `
@@ -204,7 +205,7 @@ export const CardButton = styled.button`
 
 
   font-family: inherit;
-  font-size: 30px;
+  font-size: 21px;
   font-weight: 700;
   color: #fff;
   background-color: #273746;
