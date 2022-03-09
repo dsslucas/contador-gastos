@@ -15,7 +15,7 @@ export class Dashboard extends Component {
 
     //Estados
     state = {
-        valorComida: 0,
+        valorComida: this.props.valorComida,
         valorBebida: 0,
         valorCompra: 0,
         valorViagem: 0
@@ -40,16 +40,16 @@ export class Dashboard extends Component {
                     </Column>
 
                     <Column columnNumber="6" xs="6">
-                        <Card title="Comidas" color="#C0392B" value="" />
+                        <Card title="Comidas" color="#C0392B" value={this.props.alimentacao} />
                     </Column>
                     <Column columnNumber="6" xs="6">
-                        <Card title="Bebidas" color="#F1C40F" value="" />
+                        <Card title="Bebidas" color="#F1C40F" value={this.props.bebida} />
                     </Column>
                     <Column columnNumber="6" xs="6">
-                        <Card title="Compras" color="#F39C12" value="" />
+                        <Card title="Compras" color="#F39C12" value={this.props.compra} />
                     </Column>
                     <Column columnNumber="6" xs="6">
-                        <Card title="Viagens" color="#2980B9" value="" />
+                        <Card title="Viagens" color="#2980B9" value={this.props.viagem} />
                     </Column>
                 </Row>
             </Container>
