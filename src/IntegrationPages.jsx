@@ -37,9 +37,11 @@ export class IntegrationPages extends Component {
         var bebida = parseFloat(this.state.valorBebida)
         var compra = parseFloat(this.state.valorCompra)
         var viagem = parseFloat(this.state.valorViagem)
-        var total = this.setState({valorTotal: comida + bebida})
+        //var total = this.setState({valorTotal: comida + bebida})
 
         this.calculoValorPorCategoria(valor, comida, bebida, compra, viagem)
+
+        //console.log(`DENTRO DA FUNÇÃO: VALOR TOTAL ${total}`)
         //this.somaTotal(comida, bebida, compra, viagem)
     }
 
@@ -64,6 +66,7 @@ export class IntegrationPages extends Component {
             case '1':
                 console.log("Alimentação")
                 this.setState({ valorComida: valor + comida })
+
                 break
             case '2':
                 console.log("Bebida")
@@ -81,6 +84,7 @@ export class IntegrationPages extends Component {
                 console.log("Opção inválida!", this.state.id)
                 break;
         }
+        this.setState({ valorTotal: valor + comida + bebida + compra + viagem})
     }
 
     
@@ -95,7 +99,6 @@ export class IntegrationPages extends Component {
         event.preventDefault();
         console.log("Formulário enviado!")
         this.variaveisGlobais()
-
     }
 
     render() {
