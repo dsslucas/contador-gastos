@@ -130,9 +130,6 @@ export const CardFieldset = styled.fieldset`
   border: 0;
   text-align: center;
 
-
-
-
   &:last-of-type {
     text-align: center;
   }
@@ -167,6 +164,7 @@ export const CardIcon = styled.span`
 
 export const CardOptionsNote = styled.small`
   padding-top: 8px;
+  padding-bottom: 8px;
   display: block;
   width: 100%;
   font-size: 12px;
@@ -183,8 +181,6 @@ export const CardOptions = styled.ul`
   align-items: center;
   justify-content: center;
   list-style-type: none;
-
-
 `;
 
 export const CardOptionsItem = styled.li`
@@ -204,7 +200,7 @@ export const CardButton = styled.button`
   color: #fff;
   background-color: #273746;
 
-  border-radius: 50%;
+  border-radius: 8px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);

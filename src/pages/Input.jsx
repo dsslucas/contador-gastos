@@ -30,7 +30,6 @@ export class Input extends Component {
 
     render() {
         const { valorAtual } = this.state
-        //console.log("(FORA DA FUNÇÃO) VALOR INFORMADO:", this.state.valorAtual)
 
         return (
 
@@ -42,14 +41,16 @@ export class Input extends Component {
 
                 <Row>
                     <CardFieldset>
+                        <CardOptionsNote>Informe o valor gasto e selecione uma categoria</CardOptionsNote>
+
                         <CardInput
                             placeholder={this.props.nomeInput}
                             type={this.props.tipo}
                             name="valor"
-                            value={this.state.valorAtual}
+                            value={this.props.conteudo}
                             onChange={this.handleInputChange}
-                            required
                             onSubmit={this.onTrigger}
+                            required={this.props.id === '5' ? false : true}
 
                             onKeyPress={(e) => { e.key === 'Enter' ? e.preventDefault() : console.log("Não entrei no enter") }}
                         />

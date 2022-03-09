@@ -21,7 +21,19 @@ export class Icons extends Component {
         //e.preventDefault()
     }
 
+    showCondition(){
+        if (this.props.icon && this.props.color){
+            console.log("Os icones existem!")
+            return <FontAwesomeIcon icon={this.props.icon} color={this.props.color} />
+        }
+        else{
+            return this.props.content
+        }
+    }
+
     render() {
+
+
         return (
 
 
@@ -30,9 +42,8 @@ export class Icons extends Component {
                     type={this.props.type}
                     onClick={e => this.botaoSelecionado(e)}
                     id={this.props.id}
-                    required
                 >
-                    <FontAwesomeIcon icon={this.props.icon} color={this.props.color} />
+                    {this.showCondition()}
                 </CardButton>
             </CardIcon>
 
