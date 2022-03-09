@@ -13,17 +13,11 @@ import React, { Component } from "react";
 export class Icons extends Component {
 
     botaoSelecionado(e){
-        //console.log("AMOR EU SOU SEU DEPENDENTE")
-        //console.log(e)
-        //console.log("OCORRÊNCIA")
-        //console.log(`RESPOSTA EM ICONS.JSX: ${this.props.id}`)
         this.props.resposta(this.props.id)
-        //e.preventDefault()
     }
 
     showCondition(){
         if (this.props.icon && this.props.color){
-            console.log("Os icones existem!")
             return <FontAwesomeIcon icon={this.props.icon} color={this.props.color} />
         }
         else{

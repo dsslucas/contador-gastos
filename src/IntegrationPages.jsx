@@ -79,13 +79,14 @@ export class IntegrationPages extends Component {
                 break;
         }
 
-        if (this.state.id == '5') {
+        //Realiza a soma se o ID for diferente de 5
+        if (this.state.id != '5') {
             console.log("Entrei aqui")
-        }
-        else {
             this.setState({ valorTotal: valor + comida + bebida + compra + viagem })
-        }
 
+            //Deixa o campo limpo para o Input
+            this.setState({valorInformado: ''})
+        }
     }
 
     //Envia o formulário

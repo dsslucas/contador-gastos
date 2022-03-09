@@ -67,7 +67,7 @@ export const Row = styled.div`
 //Colunas
 export const Column = styled.div`
   float: left;
-  padding: .25rem;
+  padding: .35rem;
   min-height: 1px;
   box-sizing: border-box;
 
@@ -80,6 +80,13 @@ export const Column = styled.div`
   @media only screen and (max-width: 768px){
 
     width: ${props => (props.xs / 12 * 100)}%;
+
+  }
+  &:hover {
+
+    box-shadow: ${props => props.animation ? '$0 15px 15px rgba(0, 0, 0, 0.16)' : 'none'};
+    transform: ${props => props.animation ? 'translate(0, -5px)' : 'none'};
+
 
   }
 
@@ -99,12 +106,14 @@ export const CardWrapper = styled.div`
     width: 100%
   }
 
+
 `;
 
 export const CardHeader = styled.header`
   padding-top: 8px;
   padding-bottom: 8px;
-  background: ${props => props.color}
+  background: ${props => props.color};
+
 `;
 
 export const CardHeading = styled.h1`
