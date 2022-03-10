@@ -11,7 +11,7 @@ import { Input } from './pages/Input'
 import { Icons } from './components/Icons'
 
 
-import { faBeer, faBurger, faBagShopping, faCab } from "@fortawesome/free-solid-svg-icons";
+import { faBeer, faBurger, faBagShopping, faCab, faHeartPulse } from "@fortawesome/free-solid-svg-icons";
 
 export class IntegrationPages extends Component {
 
@@ -28,7 +28,8 @@ export class IntegrationPages extends Component {
             valorBebida: 0,
             valorCompra: 0,
             valorViagem: 0,
-            id: -1
+            id: -1,
+            idParaInput: false
         }
     }
 
@@ -44,15 +45,19 @@ export class IntegrationPages extends Component {
         this.calculoValorPorCategoria(valor, comida, bebida, compra, viagem, salario)
     }
 
-    //Callback de Valor
+    //Callback de Valor, que vem do Input.jsx
     handleCallback = (novoValor, id) => {
+        console.log("VALOR QUE RECEBI DO INPUT: ", id)
+        //Salva o salário do usuário
         if (id == '-1') {
             this.setState({ salario: novoValor })
             this.setState({ salarioTotal: novoValor})
-        }
+        }        
+
+        //Registra os valores das compras
         else {
             this.setState({ valorInformado: novoValor })
-            console.log("VALOR QUE RECEBI DO INPUT: ", id)
+
         }
     }
 
@@ -63,7 +68,8 @@ export class IntegrationPages extends Component {
 
     //Calcula os valores por categoria.
     calculoValorPorCategoria(valor, comida, bebida, compra, viagem, salario) {
-        console.log(`Valor do salário vindo na função: ${salario}`)
+        //console.log(`Valor do salário vindo na função: ${salario}`)
+        //console.log(`ID presente no momento: ${this.state.id}`)
         switch (this.state.id) {
             case '1':
                 this.setState({ valorComida: valor + comida })
@@ -78,15 +84,16 @@ export class IntegrationPages extends Component {
                 this.setState({ valorViagem: valor + viagem })
                 break;
             case '5':
-                //Aqui zera TUDO
-                this.setState({ salario: ''})
+                //Aqui volta tudo ao padrão
+                this.setState({ salario: '' })
                 this.setState({ valorComida: 0 })
                 this.setState({ valorBebida: 0 })
                 this.setState({ valorCompra: 0 })
                 this.setState({ valorViagem: 0 })
                 this.setState({ valorInformado: '' })
                 this.setState({ valorTotal: 0 })
-                this.setState({ salarioTotal: 0})
+                this.setState({ salarioTotal: 0 })
+                this.setState({ id: -1 })
                 break;
         }
 
@@ -94,6 +101,7 @@ export class IntegrationPages extends Component {
         if (this.state.id != '5') {
             console.log("Entrei aqui")
             this.setState({ valorTotal: valor + comida + bebida + compra + viagem })
+            this.setState({ salarioTotal: salario })
 
             //Deixa o campo limpo para o Input
             this.setState({ valorInformado: '' })
@@ -107,47 +115,33 @@ export class IntegrationPages extends Component {
         this.variaveisGlobais()
     }
 
-    restanteAplicacao() {
-        console.log(`ID DISPONÍVEL: ${this.state.id}`)
-        if (this.state.id == '-1') {
-            return (
-                <CardFieldset>
+    //Faz a checagem para o disabled do input quando é informado o salário
+    condicaoParaEnvioInput(){
+        console.log(`
+        
+            ID: ${this.state.id}
+            SALARIO: ${this.state.salario}
+            SALARIO TOTAL: ${this.state.salarioTotal}
+        
+        `)
 
-                    <Input title="Dados a informar" nomeInput="Digite a sua receita mensal" tipo="number" conteudo={this.state.salario} parentCallback={this.handleCallback} id={this.state.id} texto="Informe sua renda mensal" />
-
-                    <CardOptions>
-                        <Icons type="submit" id="0" content="Confirmar" resposta={this.respostaCliqueBotao} />
-                    </CardOptions>
-                </CardFieldset>
-            )
+        if(this.state.id == '0'){
+            console.log("Cliquei no botão de Confirmação")
         }
-        else {
-            return (
-                <CardFieldset>
-                    <Input title="Dados a informar" nomeInput="Digite o preço pago" tipo="number" conteudo={this.state.valorInformado} parentCallback={this.handleCallback} id={this.state.id} texto="Informe quanto gastou na sua compra" />
-
-                    <CardOptionsNote>Selecione a categoria</CardOptionsNote>
-
-                    <CardOptions>
-                        <Icons icon={faBurger} color="red" type="submit" id="1" resposta={this.respostaCliqueBotao} />
-                        <Icons icon={faBeer} color="yellow" type="submit" id="2" resposta={this.respostaCliqueBotao} />
-                        <Icons icon={faBagShopping} color="orange" type="submit" id="3" resposta={this.respostaCliqueBotao} />
-                        <Icons icon={faCab} color="#7FB3D5" type="submit" id="4" resposta={this.respostaCliqueBotao} />
-                    </CardOptions>
-
-                    <CardOptions>
-                        <Icons type="submit" id="5" content="Resetar" resposta={this.respostaCliqueBotao} />
-                    </CardOptions>
-
-                </CardFieldset>
-
-            )
+        
+        if((this.state.salarioTotal != '0') && this.state.id != '-1'){
+            console.log("Entrei na condição! A partir daqui posso dar ReadOnly")
+            return true
         }
-
+        else{
+            console.log("Não entrou na condição")
+            return false
+        }
     }
 
     render() {
-        console.log(`Valor do salário informado: ${this.state.salario}`)
+        //console.log(`Valor do salário informado: ${this.state.salario}`)
+        //console.log(`Salário total: ${this.state.salarioTotal}`)
         return (
             <Container>
                 <GlobalStyle />
@@ -182,6 +176,7 @@ export class IntegrationPages extends Component {
                                         parentCallback={this.handleCallback}
                                         id={this.state.id}
                                         texto="Informe sua renda mensal"
+                                        condicaoSalario={this.condicaoParaEnvioInput()}
                                     />
 
                                     <CardOptions>
@@ -190,6 +185,7 @@ export class IntegrationPages extends Component {
                                             id="0"
                                             content="Confirmar"
                                             resposta={this.respostaCliqueBotao}
+                                            condicaoSalario={this.condicaoParaEnvioInput()}
                                         />
                                     </CardOptions>
 
@@ -200,6 +196,7 @@ export class IntegrationPages extends Component {
                                         parentCallback={this.handleCallback}
                                         id={this.state.id}
                                         texto="Informe quanto gastou na sua compra"
+                                        condicaoSalario={false}
                                     />
 
                                     <CardOptionsNote>Selecione a categoria</CardOptionsNote>

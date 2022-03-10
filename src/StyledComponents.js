@@ -201,11 +201,11 @@ export const CardOptionsItem = styled.li`
 `;
 
 export const CardButton = styled.button`
-  display: block;
+  display: ${props => props.id != '-1' ? 'flex' : 'none'};
 
 
   font-family: inherit;
-  font-size: 21px;
+  font-size: 23px;
   font-weight: 700;
   color: #fff;
   background-color: #273746;

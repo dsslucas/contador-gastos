@@ -3,7 +3,9 @@ import {
     Container,
     Row,
     Column,
-    GlobalStyle
+    GlobalStyle,
+    CardHeader,
+    CardHeading
 } from '../StyledComponents';
 
 import React, { Component } from "react";
@@ -30,7 +32,8 @@ export class Dashboard extends Component {
             <Container>
                 <GlobalStyle />
                 <Row>
-                    <h2>{this.props.title}</h2>
+                    <CardHeading>{this.props.title}</CardHeading>
+                    <h2></h2>
                 </Row>
 
                 <Row>

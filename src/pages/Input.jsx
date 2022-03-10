@@ -6,7 +6,9 @@ import {
     CardInput,
     CardOptions,
     CardOptionsNote,
-    GlobalStyle
+    GlobalStyle,
+    CardHeading,
+    CardHeader
 } from '../StyledComponents';
 
 import React, { Component } from "react";
@@ -27,41 +29,6 @@ export class Input extends Component {
         this.props.parentCallback(e.target.value, this.props.id)
     }
 
-    renderizacaoCondicional() {
-        if (this.props.id == '0') {
-            return (
-                <CardInput
-                    placeholder={this.props.nomeInput}
-                    type={this.props.tipo}
-                    name="valor"
-                    value={this.props.conteudo}
-                    onChange={this.handleInputChange}
-                    onSubmit={this.onTrigger}
-                    required={this.props.id != '5' ? true : false}
-                    disabled
-
-
-                    onKeyPress={(e) => { e.key === 'Enter' ? e.preventDefault() : console.log("Não entrei no enter") }}
-                />
-            )
-        }
-        else {
-            return (
-                <CardInput
-                    placeholder={this.props.nomeInput}
-                    type={this.props.tipo}
-                    name="valor"
-                    value={this.props.conteudo}
-                    onChange={this.handleInputChange}
-                    onSubmit={this.onTrigger}
-                    required={this.props.id != '5' ? true : false}
-
-
-                    onKeyPress={(e) => { e.key === 'Enter' ? e.preventDefault() : console.log("Não entrei no enter") }}
-                />)
-        }
-    }
-
     render() {
         const { valorAtual } = this.state
 
@@ -70,11 +37,8 @@ export class Input extends Component {
             <Container>
                 <GlobalStyle />
                 <Row>
-                    <h2>{this.props.title}</h2>
-                    <span>ID {this.props.id}</span>
-                    <span>VALOR NO INPUT {valorAtual}</span>
-
-
+                    <CardHeading>{this.props.title}</CardHeading>
+                    <h2>ID {this.props.id}</h2>
                 </Row>
 
                 <CardOptionsNote>{this.props.texto}</CardOptionsNote>
@@ -86,7 +50,8 @@ export class Input extends Component {
                     onChange={this.handleInputChange}
                     onSubmit={this.onTrigger}
                     required={this.props.id != '5' ? true : false}
-                    onKeyPress={(e) => { e.key === 'Enter' ? e.preventDefault() : console.log("Não entrei no enter") }}
+                    onKeyPress={(e) => { e.key === 'Enter' ? e.preventDefault() : console.log("Não pressionei Enter.")}}
+                    readOnly={this.props.condicaoSalario == true ? true : false}
                 />
 
 
