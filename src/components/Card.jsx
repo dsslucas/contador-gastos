@@ -20,7 +20,8 @@ export default props => {
             </CardHeader>
 
             <CardBody color={props.color}>
-                <CardText>R$ {props.value}</CardText>
+                <CardText>R$ {props.value} {props.title == 'Salário' ? '' : '(50%)'}</CardText>
+                <CardText></CardText>
             </CardBody>
         </CardWrapper>
 

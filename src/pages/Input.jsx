@@ -38,7 +38,6 @@ export class Input extends Component {
                 <GlobalStyle />
                 <Row>
                     <CardHeading>{this.props.title}</CardHeading>
-                    <h2>ID {this.props.id}</h2>
                 </Row>
 
                 <CardOptionsNote>{this.props.texto}</CardOptionsNote>
@@ -49,7 +48,7 @@ export class Input extends Component {
                     value={this.props.conteudo}
                     onChange={this.handleInputChange}
                     onSubmit={this.onTrigger}
-                    required={this.props.id != '5' ? true : false}
+                    required={this.props.id != '7' ? true : false}
                     onKeyPress={(e) => { e.key === 'Enter' ? e.preventDefault() : console.log("Não pressionei Enter.")}}
                     readOnly={this.props.condicaoSalario == true ? true : false}
                 />

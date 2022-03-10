@@ -10,8 +10,7 @@ import { Dashboard } from './pages/Dashboard'
 import { Input } from './pages/Input'
 import { Icons } from './components/Icons'
 
-
-import { faBeer, faBurger, faBagShopping, faCab, faHeartPulse } from "@fortawesome/free-solid-svg-icons";
+import { faBeer, faBurger, faBagShopping, faCab, faCashRegister, faOtter, faGaugeSimpleMed, faTree, faEnvelope, faTrainSubway, faBaseball } from "@fortawesome/free-solid-svg-icons";
 
 export class IntegrationPages extends Component {
 
@@ -24,36 +23,45 @@ export class IntegrationPages extends Component {
             salarioTotal: 0,
             valorTotal: 0,
             valorInformado: '',
+            valorConta: 0,
             valorComida: 0,
             valorBebida: 0,
             valorCompra: 0,
             valorViagem: 0,
+            valorOutros: 0,
             id: -1,
-            idParaInput: false
+            media: 0,
         }
     }
 
     //Variáveis utilizadas para cálculo dentro da função.
     variaveisGlobais() {
         var valor = parseFloat(this.state.valorInformado)
+        var conta = parseFloat(this.state.valorConta)
         var comida = parseFloat(this.state.valorComida)
         var bebida = parseFloat(this.state.valorBebida)
         var compra = parseFloat(this.state.valorCompra)
         var viagem = parseFloat(this.state.valorViagem)
-        var salario = parseFloat(this.state.salario)
+        var outros = parseFloat(this.state.valorOutros)
 
-        this.calculoValorPorCategoria(valor, comida, bebida, compra, viagem, salario)
+
+        var salario = parseFloat(this.state.salario)
+        var total = parseFloat(this.state.valorTotal)
+
+        //Realiza o cálculo de acordo com o botão selecionado
+        this.calculoValorPorCategoria(valor, comida, bebida, compra, viagem, salario, conta, outros)
+
+        this.calculoPercentual()
     }
 
     //Callback de Valor, que vem do Input.jsx
     handleCallback = (novoValor, id) => {
-        console.log("VALOR QUE RECEBI DO INPUT: ", id)
+        //console.log("VALOR QUE RECEBI DO INPUT: ", id)
         //Salva o salário do usuário
         if (id == '-1') {
             this.setState({ salario: novoValor })
-            this.setState({ salarioTotal: novoValor})
-        }        
 
+        }
         //Registra os valores das compras
         else {
             this.setState({ valorInformado: novoValor })
@@ -66,46 +74,77 @@ export class IntegrationPages extends Component {
         this.setState({ id: e })
     }
 
+    //Renderiza de acordo com as atualizações
+    componentDidUpdate() {
+        console.log("Houve alteração no componente")
+        //this.calculoPercentual()
+    }
+
     //Calcula os valores por categoria.
-    calculoValorPorCategoria(valor, comida, bebida, compra, viagem, salario) {
+    calculoValorPorCategoria(valor, comida, bebida, compra, viagem, salario, conta, outros) {
         //console.log(`Valor do salário vindo na função: ${salario}`)
         //console.log(`ID presente no momento: ${this.state.id}`)
+
         switch (this.state.id) {
             case '1':
-                this.setState({ valorComida: valor + comida })
+                this.setState({ valorConta: valor + conta })
                 break
             case '2':
+                this.setState({ valorComida: valor + comida })
+                break
+            case '3':
                 this.setState({ valorBebida: valor + bebida })
                 break;
-            case '3':
+            case '4':
                 this.setState({ valorCompra: valor + compra })
                 break;
-            case '4':
+            case '5':
+                console.log("Cliquei em Viagem")
                 this.setState({ valorViagem: valor + viagem })
                 break;
-            case '5':
+            case '6':
+                this.setState({ valorOutros: valor + outros})
+                break;
+            case '7':
                 //Aqui volta tudo ao padrão
                 this.setState({ salario: '' })
+                this.setState({ valorConta: 0 })
                 this.setState({ valorComida: 0 })
                 this.setState({ valorBebida: 0 })
                 this.setState({ valorCompra: 0 })
                 this.setState({ valorViagem: 0 })
+                this.setState({ valorOutros: 0 })
                 this.setState({ valorInformado: '' })
                 this.setState({ valorTotal: 0 })
                 this.setState({ salarioTotal: 0 })
                 this.setState({ id: -1 })
+                this.setState({ media: 0 })
                 break;
         }
 
         //Realiza a soma se o ID for diferente de 5
-        if (this.state.id != '5') {
-            console.log("Entrei aqui")
-            this.setState({ valorTotal: valor + comida + bebida + compra + viagem })
+        if (this.state.id != '7') {
+            //console.log("Entrei aqui")
+            //Soma tudo
+            this.setState({ valorTotal: valor + conta + comida + bebida + compra + viagem + outros})
             this.setState({ salarioTotal: salario })
+
+            //this.calculoPercentual()
 
             //Deixa o campo limpo para o Input
             this.setState({ valorInformado: '' })
+
+
         }
+    }
+
+    //Calcula o percentual de dinheiro gasto
+    calculoPercentual() {
+        var salario = parseFloat(this.state.salarioTotal)
+        var gasto = parseFloat(this.state.valorTotal)
+        var mediaGastoSalario = Math.round((gasto / salario) * 100)
+
+        this.setState({media: mediaGastoSalario})
     }
 
     //Envia o formulário
@@ -113,35 +152,102 @@ export class IntegrationPages extends Component {
         event.preventDefault();
         console.log("Formulário enviado!")
         this.variaveisGlobais()
+        this.calculoPercentual()
     }
 
     //Faz a checagem para o disabled do input quando é informado o salário
-    condicaoParaEnvioInput(){
-        console.log(`
+    condicaoParaEnvioInput() {
+        /*console.log(`
         
             ID: ${this.state.id}
             SALARIO: ${this.state.salario}
             SALARIO TOTAL: ${this.state.salarioTotal}
         
-        `)
+        `)*/
 
-        if(this.state.id == '0'){
+        if (this.state.id == '0') {
             console.log("Cliquei no botão de Confirmação")
+            //this.calculoPercentual()
         }
-        
-        if((this.state.salarioTotal != '0') && this.state.id != '-1'){
-            console.log("Entrei na condição! A partir daqui posso dar ReadOnly")
+
+        if ((this.state.salarioTotal != '0') && this.state.id != '-1') {
+            //console.log("Entrei na condição! A partir daqui posso dar ReadOnly")
             return true
         }
-        else{
-            console.log("Não entrou na condição")
+        else {
+            //console.log("Não entrou na condição")
             return false
+        }
+    }
+
+
+    //Renderização condicional dos botões
+    condicaoParaRenderizacaoBotoes() {
+
+        //Válido apenas quando ID == -1. Se for diferente, esse botão não é renderizado.
+        if (this.state.id == '-1') {
+            //console.log("Entrei na renderização do botão de confirmação")
+            return (
+                <CardOptions>
+                    <Icons
+                        type="submit"
+                        id="0"
+                        content="Confirmar"
+                        resposta={this.respostaCliqueBotao}
+                        condicaoSalario={this.condicaoParaEnvioInput()}
+                    />
+                </CardOptions>
+            )
+        }
+
+        //Situação oposta.
+        else {
+            return (
+                <CardFieldset>
+                    <Input
+                        nomeInput="Digite o preço pago"
+                        tipo="number"
+                        conteudo={this.state.valorInformado}
+                        parentCallback={this.handleCallback}
+                        id={this.state.id}
+                        texto="Informe quanto gastou na sua compra"
+                        condicaoSalario={false}
+                    />
+
+                    <CardOptionsNote>Selecione a categoria</CardOptionsNote>
+
+                    <CardOptions>
+                        <Icons icon={faEnvelope} color="#B0C02B" type="submit" id="1" resposta={this.respostaCliqueBotao} />
+                        <Icons icon={faBurger} color="red" type="submit" id="2" resposta={this.respostaCliqueBotao} />
+                        <Icons icon={faBeer} color="yellow" type="submit" id="3" resposta={this.respostaCliqueBotao} />
+                        <Icons icon={faBagShopping} color="orange" type="submit" id="4" resposta={this.respostaCliqueBotao} />
+                        <Icons icon={faTrainSubway} color="#7FB3D5" type="submit" id="5" resposta={this.respostaCliqueBotao} />
+                        <Icons icon={faBaseball} color="#29B985" type="submit" id="6" resposta={this.respostaCliqueBotao} />
+                    </CardOptions>
+
+                    <p>Texto</p>
+
+                    <CardOptions>
+                        <Icons type="submit" id="7" content="Resetar" resposta={this.respostaCliqueBotao} />
+                    </CardOptions>
+
+                </CardFieldset>
+
+            )
         }
     }
 
     render() {
         //console.log(`Valor do salário informado: ${this.state.salario}`)
         //console.log(`Salário total: ${this.state.salarioTotal}`)
+
+        console.log(`
+            MÉDIA:
+
+            Gastos: ${this.state.valorTotal}
+            Salário: ${this.state.salarioTotal}
+            Média: ${this.state.media}%
+        `)
         return (
             <Container>
                 <GlobalStyle />
@@ -156,11 +262,14 @@ export class IntegrationPages extends Component {
                             <Dashboard
                                 title="Análise"
                                 cash={this.state.salarioTotal}
+                                valorConta={this.state.valorConta}
                                 valueTotal={this.state.valorTotal}
                                 alimentacao={this.state.valorComida}
                                 bebida={this.state.valorBebida}
                                 compra={this.state.valorCompra}
                                 viagem={this.state.valorViagem}
+                                outros={this.state.valorOutros}
+                                percentual={this.state.media}
                             />
                         </Column>
 
@@ -179,38 +288,9 @@ export class IntegrationPages extends Component {
                                         condicaoSalario={this.condicaoParaEnvioInput()}
                                     />
 
-                                    <CardOptions>
-                                        <Icons
-                                            type="submit"
-                                            id="0"
-                                            content="Confirmar"
-                                            resposta={this.respostaCliqueBotao}
-                                            condicaoSalario={this.condicaoParaEnvioInput()}
-                                        />
-                                    </CardOptions>
+                                    {this.condicaoParaRenderizacaoBotoes()}
 
-                                    <Input
-                                        nomeInput="Digite o preço pago"
-                                        tipo="number"
-                                        conteudo={this.state.valorInformado}
-                                        parentCallback={this.handleCallback}
-                                        id={this.state.id}
-                                        texto="Informe quanto gastou na sua compra"
-                                        condicaoSalario={false}
-                                    />
 
-                                    <CardOptionsNote>Selecione a categoria</CardOptionsNote>
-
-                                    <CardOptions>
-                                        <Icons icon={faBurger} color="red" type="submit" id="1" resposta={this.respostaCliqueBotao} />
-                                        <Icons icon={faBeer} color="yellow" type="submit" id="2" resposta={this.respostaCliqueBotao} />
-                                        <Icons icon={faBagShopping} color="orange" type="submit" id="3" resposta={this.respostaCliqueBotao} />
-                                        <Icons icon={faCab} color="#7FB3D5" type="submit" id="4" resposta={this.respostaCliqueBotao} />
-                                    </CardOptions>
-
-                                    <CardOptions>
-                                        <Icons type="submit" id="5" content="Resetar" resposta={this.respostaCliqueBotao} />
-                                    </CardOptions>
                                 </CardFieldset>
                             </form>
 

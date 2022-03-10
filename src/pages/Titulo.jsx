@@ -1,10 +1,12 @@
 import React from "react";
+import { CardHeader, CardHeading, CardWrapper } from "../StyledComponents";
 
 export default props => {
     return (
-        <div>
-            <h1>{props.title}</h1>
-            <span>{props.content}</span>
-        </div>
+        <CardWrapper>
+            <CardHeader><h1>{props.title}</h1></CardHeader>
+            <CardHeading>{props.content}</CardHeading>
+        </CardWrapper>
+
     )
 }

@@ -14,9 +14,6 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 8px;
     text-align: center;
   }
-  h2, span{
-    margin: 10px;
-  }
 
   @media only screen and (max-width: 768px){
     body{
@@ -110,9 +107,12 @@ export const CardWrapper = styled.div`
 
 `;
 
+/*
+
+*/
+
 export const CardHeader = styled.header`
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding: 0;
   background: ${props => props.color};
 
 `;
@@ -123,14 +123,15 @@ export const CardHeading = styled.h1`
   text-align: center;
 `;
 
+/*
+
+*/
+
 export const CardBody = styled.div`
-  padding-right: 8px;
-  padding-left: 8px;
-  padding-bottom: 8px;
   background: ${props => props.color};
 `;
 
-export const CardText = styled.span`
+export const CardText = styled.p`
 
 `
 
@@ -201,14 +202,13 @@ export const CardOptionsItem = styled.li`
 `;
 
 export const CardButton = styled.button`
-  display: ${props => props.id != '-1' ? 'flex' : 'none'};
-
-
   font-family: inherit;
   font-size: 23px;
   font-weight: 700;
   color: #fff;
   background-color: #273746;
+  margin-right: 5px;
+  margin-left: 5px;
 
   border-radius: 8px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
