@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 //Estilizações CSS via Styled Components
 import {
-    Container, Row, Column, GlobalStyle, CardWrapper, CardOptions, CardOptionsNote, CardFieldset, CardButton
+    Container, Row, Column, GlobalStyle, CardWrapper, CardOptions, CardOptionsNote, CardFieldset, CardButton, CardText
 } from './StyledComponents';
 
 import Titulo from './pages/Titulo';
@@ -30,7 +30,7 @@ export class IntegrationPages extends Component {
             valorViagem: 0,
             valorOutros: 0,
             id: -1,
-            media: 0,
+            media: 0
         }
     }
 
@@ -49,18 +49,23 @@ export class IntegrationPages extends Component {
         var total = parseFloat(this.state.valorTotal)
 
         //Realiza o cálculo de acordo com o botão selecionado
-        this.calculoValorPorCategoria(valor, comida, bebida, compra, viagem, salario, conta, outros)
+        console.log("Entrei na função de Cálculo por categoria")
+        this.calculoValorPorCategoria(valor, comida, bebida, compra, viagem, salario, conta, outros, total)
 
-        this.calculoPercentual()
+        //console.log("Entrei no cálculo percentual")
+        //this.calculoPercentual()
+
+        
+
     }
 
     //Callback de Valor, que vem do Input.jsx
     handleCallback = (novoValor, id) => {
         //console.log("VALOR QUE RECEBI DO INPUT: ", id)
+
         //Salva o salário do usuário
         if (id == '-1') {
             this.setState({ salario: novoValor })
-
         }
         //Registra os valores das compras
         else {
@@ -76,7 +81,7 @@ export class IntegrationPages extends Component {
 
     //Renderiza de acordo com as atualizações
     componentDidUpdate() {
-        console.log("Houve alteração no componente")
+        //console.log("Houve alteração no componente")
         //this.calculoPercentual()
     }
 
@@ -103,7 +108,7 @@ export class IntegrationPages extends Component {
                 this.setState({ valorViagem: valor + viagem })
                 break;
             case '6':
-                this.setState({ valorOutros: valor + outros})
+                this.setState({ valorOutros: valor + outros })
                 break;
             case '7':
                 //Aqui volta tudo ao padrão
@@ -122,29 +127,40 @@ export class IntegrationPages extends Component {
                 break;
         }
 
+
+
         //Realiza a soma se o ID for diferente de 5
         if (this.state.id != '7') {
             //console.log("Entrei aqui")
+
+            //Calcula o percentual, importante para o texto no final
+            var totalGastos = valor + conta + comida + bebida + compra + viagem + outros
+            var mediaGastoSalario = Math.round((totalGastos / salario) * 100)
+            this.setState({ media: mediaGastoSalario})
+
+            /*
+            console.log(`
+                NA FUNÇÃO:
+                Total de gastos: ${totalGastos}
+                Salário: ${salario}
+                Média: ${mediaGastoSalario}
+
+                ESTADO DA MEDIA: ${this.state.media}
+            
+            `)
+            */
+
             //Soma tudo
-            this.setState({ valorTotal: valor + conta + comida + bebida + compra + viagem + outros})
+            this.setState({ valorTotal: valor + conta + comida + bebida + compra + viagem + outros })
             this.setState({ salarioTotal: salario })
+
 
             //this.calculoPercentual()
 
             //Deixa o campo limpo para o Input
             this.setState({ valorInformado: '' })
 
-
         }
-    }
-
-    //Calcula o percentual de dinheiro gasto
-    calculoPercentual() {
-        var salario = parseFloat(this.state.salarioTotal)
-        var gasto = parseFloat(this.state.valorTotal)
-        var mediaGastoSalario = Math.round((gasto / salario) * 100)
-
-        this.setState({media: mediaGastoSalario})
     }
 
     //Envia o formulário
@@ -152,12 +168,12 @@ export class IntegrationPages extends Component {
         event.preventDefault();
         console.log("Formulário enviado!")
         this.variaveisGlobais()
-        this.calculoPercentual()
     }
 
     //Faz a checagem para o disabled do input quando é informado o salário
     condicaoParaEnvioInput() {
         /*console.log(`
+            ENVIO INPUT
         
             ID: ${this.state.id}
             SALARIO: ${this.state.salario}
@@ -167,6 +183,7 @@ export class IntegrationPages extends Component {
 
         if (this.state.id == '0') {
             console.log("Cliquei no botão de Confirmação")
+
             //this.calculoPercentual()
         }
 
@@ -225,7 +242,7 @@ export class IntegrationPages extends Component {
                         <Icons icon={faBaseball} color="#29B985" type="submit" id="6" resposta={this.respostaCliqueBotao} />
                     </CardOptions>
 
-                    <p>Texto</p>
+                    <CardText>Você gastou {this.state.media}% de sua renda</CardText>
 
                     <CardOptions>
                         <Icons type="submit" id="7" content="Resetar" resposta={this.respostaCliqueBotao} />
@@ -289,6 +306,7 @@ export class IntegrationPages extends Component {
                                     />
 
                                     {this.condicaoParaRenderizacaoBotoes()}
+
 
 
                                 </CardFieldset>
