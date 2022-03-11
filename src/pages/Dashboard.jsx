@@ -57,7 +57,7 @@ export class Dashboard extends Component {
 
                 <Row>
                     <Column columnNumber="12" xs="12" md="12" lg="12" animation='true'>
-                        <Card title="Receitas" columns="12" color="#1E8449" value={this.props.cash} />
+                        <Card title="Receita" columns="12" color="#1E8449" value={this.props.cash} />
                     </Column>
 
                     <Column columnNumber="4" xs="6" md="4" lg="4" animation='true'>

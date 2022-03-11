@@ -13,16 +13,18 @@ import React from "react";
 export default props => {
 
     //Exibe o percentual sobre algumas condições.
-    function exibeDados(){
-        
-        //Se for undefined, média 0 ou o título for 'Salário'
-        if(Number.isNaN(props.media) || props.media == 0 || props.title == 'Receitas'){
-            return ''
+    function exibeDados() {
+
+        var string = (props.value).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+
+        //Se for undefined, média 0 ou o título for 'Receita'
+        if (Number.isNaN(props.media) || props.media == 0 || props.title == 'Receita') {
+            return `${string}`
         }
-        else{
-            return `(${props.media}%)`
+        else {
+
+            return `${string} (${props.media}%)`
         }
-        
     }
 
     return (
@@ -32,8 +34,7 @@ export default props => {
             </CardHeader>
 
             <CardBody color={props.color}>
-                <CardText>R$ {props.value} {exibeDados()}</CardText>
-                <CardText></CardText>
+                <CardText>{exibeDados()}</CardText>
             </CardBody>
         </CardWrapper>
 
