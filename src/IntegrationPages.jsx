@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 //Estilizações CSS via Styled Components
 import {
-    Container, Row, Column, GlobalStyle, CardWrapper, CardOptions, CardOptionsNote, CardFieldset, CardButton, CardText
+    Container, Row, Column, GlobalStyle, CardWrapper, CardOptions, CardOptionsNote, CardFieldset, CardText
 } from './StyledComponents';
 
 import Titulo from './pages/Titulo';
@@ -10,7 +10,7 @@ import { Dashboard } from './pages/Dashboard'
 import { Input } from './pages/Input'
 import { Icons } from './components/Icons'
 
-import { faBeer, faBurger, faBagShopping, faCab, faCashRegister, faOtter, faGaugeSimpleMed, faTree, faEnvelope, faTrainSubway, faBaseball } from "@fortawesome/free-solid-svg-icons";
+import { faBeer, faBurger, faBagShopping, faEnvelope, faTrainSubway, faBaseball } from "@fortawesome/free-solid-svg-icons";
 
 export class IntegrationPages extends Component {
 
@@ -44,33 +44,23 @@ export class IntegrationPages extends Component {
         var viagem = parseFloat(this.state.valorViagem)
         var outros = parseFloat(this.state.valorOutros)
 
-
         var salario = parseFloat(this.state.salario)
         var total = parseFloat(this.state.valorTotal)
 
         //Realiza o cálculo de acordo com o botão selecionado
-        console.log("Entrei na função de Cálculo por categoria")
         this.calculoValorPorCategoria(valor, comida, bebida, compra, viagem, salario, conta, outros, total)
-
-        //console.log("Entrei no cálculo percentual")
-        //this.calculoPercentual()
-
-        
-
     }
 
     //Callback de Valor, que vem do Input.jsx
     handleCallback = (novoValor, id) => {
-        //console.log("VALOR QUE RECEBI DO INPUT: ", id)
-
         //Salva o salário do usuário
         if (id == '-1') {
             this.setState({ salario: novoValor })
+            this.setState({ salarioTotal: novoValor })
         }
         //Registra os valores das compras
         else {
             this.setState({ valorInformado: novoValor })
-
         }
     }
 
@@ -79,17 +69,8 @@ export class IntegrationPages extends Component {
         this.setState({ id: e })
     }
 
-    //Renderiza de acordo com as atualizações
-    componentDidUpdate() {
-        //console.log("Houve alteração no componente")
-        //this.calculoPercentual()
-    }
-
     //Calcula os valores por categoria.
     calculoValorPorCategoria(valor, comida, bebida, compra, viagem, salario, conta, outros) {
-        //console.log(`Valor do salário vindo na função: ${salario}`)
-        //console.log(`ID presente no momento: ${this.state.id}`)
-
         switch (this.state.id) {
             case '1':
                 this.setState({ valorConta: valor + conta })
@@ -104,7 +85,6 @@ export class IntegrationPages extends Component {
                 this.setState({ valorCompra: valor + compra })
                 break;
             case '5':
-                console.log("Cliquei em Viagem")
                 this.setState({ valorViagem: valor + viagem })
                 break;
             case '6':
@@ -127,73 +107,82 @@ export class IntegrationPages extends Component {
                 break;
         }
 
-
-
         //Realiza a soma se o ID for diferente de 5
-        if (this.state.id != '7') {
-            //console.log("Entrei aqui")
-
+        if (this.state.id != '7'){
             //Calcula o percentual, importante para o texto no final
             var totalGastos = valor + conta + comida + bebida + compra + viagem + outros
             var mediaGastoSalario = Math.round((totalGastos / salario) * 100)
-            this.setState({ media: mediaGastoSalario})
-
-            /*
-            console.log(`
-                NA FUNÇÃO:
-                Total de gastos: ${totalGastos}
-                Salário: ${salario}
-                Média: ${mediaGastoSalario}
-
-                ESTADO DA MEDIA: ${this.state.media}
-            
-            `)
-            */
+            this.setState({ media: mediaGastoSalario })
 
             //Soma tudo
             this.setState({ valorTotal: valor + conta + comida + bebida + compra + viagem + outros })
             this.setState({ salarioTotal: salario })
 
-
-            //this.calculoPercentual()
-
             //Deixa o campo limpo para o Input
             this.setState({ valorInformado: '' })
-
         }
     }
 
     //Envia o formulário
     onTrigger = (event) => {
         event.preventDefault();
-        console.log("Formulário enviado!")
         this.variaveisGlobais()
     }
 
     //Faz a checagem para o disabled do input quando é informado o salário
     condicaoParaEnvioInput() {
-        /*console.log(`
-            ENVIO INPUT
-        
-            ID: ${this.state.id}
-            SALARIO: ${this.state.salario}
-            SALARIO TOTAL: ${this.state.salarioTotal}
-        
-        `)*/
-
-        if (this.state.id == '0') {
-            console.log("Cliquei no botão de Confirmação")
-
-            //this.calculoPercentual()
-        }
-
+        //Condição que permite dar o Read Only no input da renda
         if ((this.state.salarioTotal != '0') && this.state.id != '-1') {
-            //console.log("Entrei na condição! A partir daqui posso dar ReadOnly")
             return true
         }
         else {
-            //console.log("Não entrou na condição")
             return false
+        }
+    }
+
+    //Retorno sobre a situação financeira
+    mensagemSobreAnalise() {
+
+        const mensagemAdicional = 'Vale ressaltar que isto é uma recomendação estipulada por economistas. As opiniões podem variar entre especialistas em finanças.'
+
+        if (this.state.media < 70 && this.state.media != 0) {
+            return (
+                <CardFieldset>
+                    <CardOptionsNote>Conclusão</CardOptionsNote>
+                    <CardText>Parabéns! Você gasta {this.state.media}% de sua receita. Continue economizando!</CardText>
+                    <CardText>{mensagemAdicional}</CardText>
+                </CardFieldset>
+
+            )
+        }
+        else if (this.state.media >= 70 && this.state.media < 90) {
+            return (
+                <CardFieldset>
+                    <CardOptionsNote>Conclusão</CardOptionsNote>
+                    <CardText>Esteja atento com sua saúde financeira! Você está gastando {this.state.media}% de sua receita. Busque cortar gastos supérfluos para o equilíbrio do seu orçamento.</CardText>
+                    <CardText>{mensagemAdicional}</CardText>
+                </CardFieldset>
+            )
+
+        }
+        else if (this.state.media >= 90 && this.state.media <= 100) {
+            return (
+                <CardFieldset>
+                    <CardOptionsNote>Conclusão</CardOptionsNote>
+                    <CardText>Perigo! Seus gastos estão em {this.state.media}% em relação a sua receita. É recomendado cortar gastos supérfluos e "apertar as mangas" para que seu dinheiro não se esgote.</CardText>
+                    <CardText>{mensagemAdicional}</CardText>
+                </CardFieldset>
+            )
+
+        }
+        else if (this.state.media > 100) {
+            return (
+                <CardFieldset>
+                    <CardOptionsNote>Conclusão</CardOptionsNote>
+                    <CardText>Seu dinheiro acabou! Sugerimos que seus gastos, que estão em {this.state.media}%, possam ser reduzidos através do corte de gastos supérfluos. Esteja atento com as dívidas!</CardText>
+                    <CardText>{mensagemAdicional}</CardText>
+                </CardFieldset>
+            )
         }
     }
 
@@ -202,6 +191,8 @@ export class IntegrationPages extends Component {
     condicaoParaRenderizacaoBotoes() {
 
         //Válido apenas quando ID == -1. Se for diferente, esse botão não é renderizado.
+
+
         if (this.state.id == '-1') {
             //console.log("Entrei na renderização do botão de confirmação")
             return (
@@ -231,10 +222,10 @@ export class IntegrationPages extends Component {
                         condicaoSalario={false}
                     />
 
-                    <CardOptionsNote>Selecione a categoria</CardOptionsNote>
+                    <CardOptionsNote>Selecione uma categoria</CardOptionsNote>
 
                     <CardOptions>
-                        <Icons icon={faEnvelope} color="#B0C02B" type="submit" id="1" resposta={this.respostaCliqueBotao} />
+                        <Icons icon={faEnvelope} color="#C800E6" type="submit" id="1" resposta={this.respostaCliqueBotao} />
                         <Icons icon={faBurger} color="red" type="submit" id="2" resposta={this.respostaCliqueBotao} />
                         <Icons icon={faBeer} color="yellow" type="submit" id="3" resposta={this.respostaCliqueBotao} />
                         <Icons icon={faBagShopping} color="orange" type="submit" id="4" resposta={this.respostaCliqueBotao} />
@@ -242,36 +233,25 @@ export class IntegrationPages extends Component {
                         <Icons icon={faBaseball} color="#29B985" type="submit" id="6" resposta={this.respostaCliqueBotao} />
                     </CardOptions>
 
-                    <CardText>Você gastou {this.state.media}% de sua renda</CardText>
+                    {this.mensagemSobreAnalise()}
 
                     <CardOptions>
                         <Icons type="submit" id="7" content="Resetar" resposta={this.respostaCliqueBotao} />
                     </CardOptions>
 
                 </CardFieldset>
-
             )
         }
     }
 
     render() {
-        //console.log(`Valor do salário informado: ${this.state.salario}`)
-        //console.log(`Salário total: ${this.state.salarioTotal}`)
-
-        console.log(`
-            MÉDIA:
-
-            Gastos: ${this.state.valorTotal}
-            Salário: ${this.state.salarioTotal}
-            Média: ${this.state.media}%
-        `)
         return (
             <Container>
                 <GlobalStyle />
 
                 <CardWrapper>
                     <Row>
-                        <Titulo title="Cálculo de Gastos" content="Informe quais gastos você possui" />
+                        <Titulo title="Cálculo de Gastos" content="Criado com o intuito de reforçar a conscientização da saúde financeira. Os dados não são salvos em servidores." />
                     </Row>
 
                     <Row>
@@ -306,8 +286,6 @@ export class IntegrationPages extends Component {
                                     />
 
                                     {this.condicaoParaRenderizacaoBotoes()}
-
-
 
                                 </CardFieldset>
                             </form>

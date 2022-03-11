@@ -6,7 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
-    height: 100vh;
+    min-height: 100vh;
     background: #212F3D;
   }
   div{
@@ -15,11 +15,13 @@ export const GlobalStyle = createGlobalStyle`
     text-align: center;
   }
 
-  @media only screen and (max-width: 768px){
+  @media only screen and (max-width: 768px) and (max-height: 960px){
+
     body{
-      height: auto;
       margin-top: 8px;
       margin-bottom: 8px;
+      height: auto;
+      align-items: center;
       overflow: scroll;
     }
   }
@@ -101,7 +103,7 @@ export const CardWrapper = styled.div`
   background: ${props => props.color};
 
   @media only screen and (max-width: 768px){
-    width: 100%
+    width: 100%;
   }
 
 
@@ -113,6 +115,8 @@ export const CardWrapper = styled.div`
 
 export const CardHeader = styled.header`
   padding: 0;
+  font-size: 0.7rem;
+  
   background: ${props => props.color};
 
 `;
@@ -121,6 +125,7 @@ export const CardHeading = styled.h1`
   font-size: 15px;
   font-weight: bold;
   text-align: center;
+  
 `;
 
 /*
@@ -132,6 +137,7 @@ export const CardBody = styled.div`
 `;
 
 export const CardText = styled.p`
+  padding: 0;
 
 `
 

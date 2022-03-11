@@ -18,20 +18,12 @@ import { useEffect } from 'react';
 //FAZER A SOMA DOS VALORES
 
 export class Input extends Component {
-
-    state = {
-        valorAnterior: '',
-        valorAtual: ''
-    }
-
     handleInputChange = (e) => {
         this.setState({ valorAtual: e.target.value })
         this.props.parentCallback(e.target.value, this.props.id)
     }
 
     render() {
-        const { valorAtual } = this.state
-
         return (
 
             <Container>
@@ -52,10 +44,7 @@ export class Input extends Component {
                     onKeyPress={(e) => { e.key === 'Enter' ? e.preventDefault() : console.log("Não pressionei Enter.")}}
                     readOnly={this.props.condicaoSalario == true ? true : false}
                 />
-
-
             </Container>
-
         )
     }
 

@@ -12,18 +12,14 @@ import React from "react";
 
 export default props => {
 
-    console.log(`Dados vindo do Dashboard: ${props.media}`)
-
     //Exibe o percentual sobre algumas condições.
     function exibeDados(){
         
         //Se for undefined, média 0 ou o título for 'Salário'
-        if(Number.isNaN(props.media) || props.media == 0 || props.title == 'Salário'){
-            console.log("Indefinido")
+        if(Number.isNaN(props.media) || props.media == 0 || props.title == 'Receitas'){
             return ''
         }
         else{
-            console.log("Definido")
             return `(${props.media}%)`
         }
         
