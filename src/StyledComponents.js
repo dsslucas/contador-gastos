@@ -10,18 +10,23 @@ export const GlobalStyle = createGlobalStyle`
     background: #212F3D;
   }
   div{
-    background: #D7DBDD;
     border-radius: 8px;
     text-align: center;
   }
 
-  @media only screen and (max-width: 768px) and (max-height: 960px){
+  @media only screen and (max-width: 768px){
 
     body{
       margin-top: 8px;
       margin-bottom: 8px;
       height: auto;
       align-items: center;
+      overflow: scroll;
+    }
+  }
+
+  @media only screen and (max-width: 1200px){
+    body{
       overflow: scroll;
     }
   }
@@ -34,6 +39,7 @@ export const Container = styled.div`
   margin-right: auto;
   margin-left: auto;
   box-sizing: border-box;
+  background: #D7DBDD;
 
   &:before, &:after{
     content: "";
@@ -43,6 +49,8 @@ export const Container = styled.div`
   &:after{
     clean: both;
   }
+
+
 `
 
 //Linhas
@@ -73,15 +81,22 @@ export const Column = styled.div`
 
   background: ${props => props.color};
 
-  @media only screen and (min-width: 768px){
+  @media only screen and (min-width: 1200px){
     width: ${props => (props.columnNumber ? props.columnNumber / 12 * 100 : 8.33)}%;
   }
 
-  @media only screen and (max-width: 768px){
-
+  @media only screen and (max-width: 600px){
     width: ${props => (props.xs / 12 * 100)}%;
-
   }
+
+  @media only screen and (min-width: 601px) {
+    width: ${props => (props.md/12 * 100)}%;
+  }
+
+  @media only screen and (min-width: 992px){
+    width: ${props => (props.lg/12 * 100)}%;
+  }
+
   &:hover {
 
     box-shadow: ${props => props.animation ? '$0 15px 15px rgba(0, 0, 0, 0.16)' : 'none'};
@@ -122,7 +137,7 @@ export const CardHeader = styled.header`
 `;
 
 export const CardHeading = styled.h1`
-  font-size: 15px;
+  font-size: 1.0rem;
   font-weight: bold;
   text-align: center;
   
@@ -138,6 +153,7 @@ export const CardBody = styled.div`
 
 export const CardText = styled.p`
   padding: 0;
+  font-size: 1.1rem;
 
 `
 
@@ -156,7 +172,7 @@ export const CardInput = styled.input`
   padding: 7px 0;
   width: 100%;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 1.1rem;
   border-top: 0;
   border-right: 0;
   border-bottom: 1px solid #ddd;
@@ -184,7 +200,7 @@ export const CardOptionsNote = styled.small`
   padding-bottom: 8px;
   display: block;
   width: 100%;
-  font-size: 12px;
+  font-size: 1.1rem;
   text-align: center;
   text-transform: uppercase;
 `;
@@ -209,7 +225,7 @@ export const CardOptionsItem = styled.li`
 
 export const CardButton = styled.button`
   font-family: inherit;
-  font-size: 23px;
+  font-size: 1.6rem;
   font-weight: 700;
   color: #fff;
   background-color: #273746;
