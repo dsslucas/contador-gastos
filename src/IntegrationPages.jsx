@@ -149,18 +149,15 @@ export class IntegrationPages extends Component {
             return (
                 <CardFieldset>
                     <CardOptionsNote>Conclusão</CardOptionsNote>
-                    <CardText>Parabéns! Você gasta {this.state.media}% de sua receita. Continue economizando!</CardText>
-                    <CardText>{mensagemAdicional}</CardText>
+                    <CardText>Parabéns! Você gasta {this.state.media}% de sua receita. Continue economizando! {mensagemAdicional}</CardText>
                 </CardFieldset>
-
             )
         }
         else if (this.state.media >= 70 && this.state.media < 90) {
             return (
                 <CardFieldset>
                     <CardOptionsNote>Conclusão</CardOptionsNote>
-                    <CardText>Esteja atento com sua saúde financeira! Você está gastando {this.state.media}% de sua receita. Busque cortar gastos supérfluos para o equilíbrio do seu orçamento.</CardText>
-                    <CardText>{mensagemAdicional}</CardText>
+                    <CardText>Esteja atento com sua saúde financeira! Você está gastando {this.state.media}% de sua receita. Busque cortar gastos supérfluos para o equilíbrio do seu orçamento. {mensagemAdicional}</CardText>
                 </CardFieldset>
             )
 
@@ -169,8 +166,7 @@ export class IntegrationPages extends Component {
             return (
                 <CardFieldset>
                     <CardOptionsNote>Conclusão</CardOptionsNote>
-                    <CardText>Perigo! Seus gastos estão em {this.state.media}% em relação a sua receita. É recomendado cortar gastos supérfluos e "apertar as mangas" para que seu dinheiro não se esgote.</CardText>
-                    <CardText>{mensagemAdicional}</CardText>
+                    <CardText>Perigo! Seus gastos estão em {this.state.media}% em relação a sua receita. É recomendado cortar gastos supérfluos e "apertar as mangas" para que seu dinheiro não se esgote. {mensagemAdicional}</CardText>
                 </CardFieldset>
             )
 
@@ -179,20 +175,16 @@ export class IntegrationPages extends Component {
             return (
                 <CardFieldset>
                     <CardOptionsNote>Conclusão</CardOptionsNote>
-                    <CardText>Seu dinheiro acabou! Sugerimos que seus gastos, que estão em {this.state.media}%, possam ser reduzidos através do corte de gastos supérfluos. Esteja atento com as dívidas!</CardText>
-                    <CardText>{mensagemAdicional}</CardText>
+                    <CardText>Seu dinheiro acabou! Sugerimos que seus gastos, que estão em {this.state.media}%, possam ser reduzidos através do corte de gastos supérfluos. Esteja atento com as dívidas! {mensagemAdicional}</CardText>
                 </CardFieldset>
             )
         }
     }
 
-
     //Renderização condicional dos botões
     condicaoParaRenderizacaoBotoes() {
 
         //Válido apenas quando ID == -1. Se for diferente, esse botão não é renderizado.
-
-
         if (this.state.id == '-1') {
             //console.log("Entrei na renderização do botão de confirmação")
             return (
@@ -292,6 +284,8 @@ export class IntegrationPages extends Component {
 
                         </Column>
                     </Row>
+
+
                 </CardWrapper>
             </Container>
         )

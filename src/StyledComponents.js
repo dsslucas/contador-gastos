@@ -30,12 +30,18 @@ export const GlobalStyle = createGlobalStyle`
       overflow: scroll;
     }
   }
+
+  @media only screen and (min-width: 1200px){
+    body{
+      height: 100vh;
+    }
+  }
 `
 
 //COntainer
 export const Container = styled.div`
   max-width: 1360px;
-  padding-bottom: 4px;
+
   margin-right: auto;
   margin-left: auto;
   box-sizing: border-box;
@@ -124,28 +130,15 @@ export const CardWrapper = styled.div`
 
 `;
 
-/*
-
-*/
-
 export const CardHeader = styled.header`
-  padding: 0;
-  font-size: 0.7rem;
-  
   background: ${props => props.color};
-
 `;
 
 export const CardHeading = styled.h1`
-  font-size: 1.0rem;
+  font-size: 16px;
   font-weight: bold;
   text-align: center;
-  
 `;
-
-/*
-
-*/
 
 export const CardBody = styled.div`
   background: ${props => props.color};
@@ -153,7 +146,7 @@ export const CardBody = styled.div`
 
 export const CardText = styled.p`
   padding: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
 
 `
 
@@ -172,7 +165,7 @@ export const CardInput = styled.input`
   padding: 7px 0;
   width: 100%;
   font-family: inherit;
-  font-size: 1.1rem;
+  font-size: 14px;
   border-top: 0;
   border-right: 0;
   border-bottom: 1px solid #ddd;
@@ -200,7 +193,7 @@ export const CardOptionsNote = styled.small`
   padding-bottom: 8px;
   display: block;
   width: 100%;
-  font-size: 1.1rem;
+  font-size: 12px;
   text-align: center;
   text-transform: uppercase;
 `;
@@ -216,19 +209,13 @@ export const CardOptions = styled.ul`
   list-style-type: none;
 `;
 
-export const CardOptionsItem = styled.li`
-  &:nth-of-type(n + 2) {
-    margin-left: 16px;
-  }
-
-`;
-
 export const CardButton = styled.button`
   font-family: inherit;
   font-size: 1.6rem;
   font-weight: 700;
   color: #fff;
   background-color: #273746;
+  margin-top: 5px;
   margin-right: 5px;
   margin-left: 5px;
 
