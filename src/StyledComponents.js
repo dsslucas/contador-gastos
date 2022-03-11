@@ -142,11 +142,14 @@ export const CardHeading = styled.h1`
 
 export const CardBody = styled.div`
   background: ${props => props.color};
+  margin: 8px;
+  max-height: 35px;
 `;
 
 export const CardText = styled.p`
   padding: 0;
   font-size: 1rem;
+  margin: 0;
 
 `
 
@@ -218,6 +221,7 @@ export const CardButton = styled.button`
   margin-top: 5px;
   margin-right: 5px;
   margin-left: 5px;
+  margin-bottom: 5px;
 
   border-radius: 8px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
