@@ -143,7 +143,7 @@ export class IntegrationPages extends Component {
     //Retorno sobre a situação financeira
     mensagemSobreAnalise() {
 
-        const mensagemAdicional = 'Vale ressaltar que isto é uma recomendação estipulada por economistas. As opiniões podem variar entre especialistas em finanças.'
+        const mensagemAdicional = 'Vale ressaltar que isto é uma recomendação estipulada por economistas. As opiniões podem variar.'
 
         if (this.state.media < 70 && this.state.media != 0) {
             return (
@@ -255,7 +255,7 @@ export class IntegrationPages extends Component {
                     </Row>
 
                     <Row>
-                        <Column columnNumber="6" xs="12">
+                        <Column columnNumber="6" xs="12" md="12" lg="6" >
                             <Dashboard
                                 title="Análise"
                                 cash={this.state.salarioTotal}
@@ -270,7 +270,7 @@ export class IntegrationPages extends Component {
                             />
                         </Column>
 
-                        <Column columnNumber="6" xs="12">
+                        <Column columnNumber="6" xs="12" md="12" lg="6">
                             <form onSubmit={this.onTrigger}>
                                 <CardFieldset>
 

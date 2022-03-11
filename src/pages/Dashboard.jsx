@@ -56,34 +56,34 @@ export class Dashboard extends Component {
                 </Row>
 
                 <Row>
-                    <Column columnNumber="12" xs="12" animation='true'>
+                    <Column columnNumber="12" xs="12" md="12" lg="12" animation='true'>
                         <Card title="Receitas" columns="12" color="#1E8449" value={this.props.cash} />
                     </Column>
 
-                    <Column columnNumber="4" xs="6" animation='true'>
+                    <Column columnNumber="4" xs="6" md="4" lg="4" animation='true'>
                         <Card title="Contas" color="#E00EFF" value={this.props.valorConta} media={Math.round((this.props.valorConta / this.props.cash) * 100)} />
                     </Column>
 
-                    <Column columnNumber="4" xs="6" animation='true'>
+                    <Column columnNumber="4" xs="6" md="4" lg="4" animation='true'>
                         <Card title="Comidas" color="#FC4732" value={this.props.alimentacao} media={Math.round((this.props.alimentacao / this.props.cash) * 100)} />
                     </Column>
 
-                    <Column columnNumber="4" xs="6" animation='true'>
+                    <Column columnNumber="4" xs="6" md="4" lg="4" animation='true'>
                         <Card title="Bebidas" color="#FFCF0E" value={this.props.bebida} media={Math.round((this.props.bebida / this.props.cash) * 100)} />
                     </Column>
 
-                    <Column columnNumber="4" xs="6" animation='true'>
+                    <Column columnNumber="4" xs="6" md="4" lg="4" animation='true'>
                         <Card title="Compras" color="#FF9F0E" value={this.props.compra} media={Math.round((this.props.compra / this.props.cash) * 100)} />
                     </Column>
-                    <Column columnNumber="4" xs="6" animation='true'>
+                    <Column columnNumber="4" xs="6" md="4" lg="4" animation='true'>
                         <Card title="Viagens" color="#0EAFFF" value={this.props.viagem} media={Math.round((this.props.viagem / this.props.cash) * 100)} />
                     </Column>
 
-                    <Column columnNumber="4" xs="6" animation='true'>
+                    <Column columnNumber="4" xs="6" md="4" lg="4" animation='true'>
                         <Card title="Outros" color="#29B985" value={this.props.outros} media={Math.round((this.props.outros / this.props.cash) * 100)} />
                     </Column>
 
-                    <Column columnNumber="12" xs="12" animation='true'>
+                    <Column columnNumber="12" xs="12" md="12" lg="12" animation='true'>
                         <Card title="Gasto total" columns="12" color={this.coresParaGastoTotal()} value={this.props.valueTotal} media={this.props.percentual} />
                     </Column>
                 </Row>
