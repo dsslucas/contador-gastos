@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# Cálculo de Gastos Pessoais
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Em um tempo não muito distante, eu controlava rigorosamente todos os meus gastos em uma planilha. Por hobby e por ser cauteloso, sempre gostei de gerenciar minha receita e categorizar os valores; e foi através disto que criei este projeto de forma 100% autoral.
 
-## Available Scripts
+## Layout
+![Pagina inicial](/src/img/printscreen.png)
+[Link para o site](https://contador-gastos.herokuapp.com/)
 
-In the project directory, you can run:
+## Como funciona?
+Das funcionalidades, temos:
+- O usuário informa as suas receitas (entre salário, renda extra ou qualquer ganho financeiro);
+- Após clicar no botão "Confirmar", o usuário informa o valor que desembolsou em seis categorias;
+- Estas categorias, mostradas no dashboard, estão com as cores correspondentes dos botões. Ao clicar, o valor é somado;
+- Caso o usuário queira recomeçar os cálculos, basta clicar em "Resetar".
 
-### `npm start`
+### Alguns pontos a destacar:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Estabeleci um percentual entre Gastos Totais e a Receita. Vale ressaltar que **não existe uma regra padrão vigente para estipular os percentuais de aceitação, de alerta e de perigo, mas sim recomendações**. Portanto, baseado em experiência pessoal, estabeleci uma regra nos quais:
+* Até 70%: Estado de aceitação, o usuário está fazendo um correto gerenciamento de seus gastos;
+* Entre 70% a 90%: Estado de atenção, no qual o usuário precisa ficar atento com suas finanças para que suas receitas não se esgotem;
+* Entre 90% a 100%: Estado de alerta, neste caso, o usuário é informado que os seus gastos estão próximos de suas receitas;
+* Acima de 100%: As receitas se esgotaram e o usuário está sujeito a se endividar.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Dentro da Análise:
+* O dashboard de **Gasto total** altera as cores de acordo com o percentual. Até 70%, exibe cor verde; amarelo entre 70% a 90%; vermelho para percentual acima de 90%. Todos estes tem paleta de cores gradativas;
+* É exibido um breve relatório ao usuário, de acordo com os percentuais informados acima.
 
-### `npm test`
+## O que usei?
+- HTML5 e CSS3
+- JavaScript ES6
+- Framework React.js (versão 17.0.2)
+- Font Awesome (versão 6.0.0)
+- Styled Components
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Instruções
+* Nesta página do GitHub, clique em "Code" e **copie o link disponibilizado para clone**.
+    ![Git](/src/img/git-clone.png)
+* Acessando um terminal (como CMD, Cmder ou o terminal integrado do Visual Studio IDE), digite ```git clone [link do repositório copiado]```
+* Após a clonagem e ainda no terminal, digite ```npm i```. Este comando irá baixar todas as dependências disponíveis em ```package.json```.
+* Depois de tudo instalado, digite ```npm start``` para iniciar o projeto.
 
-### `npm run build`
+## Observações
+- Os dados informados **NÃO VÃO PARA UM SERVIDOR BACKEND!**. Todos os dados informados são calculados via JavaScript e se mantém apenas no browser;
+- É possível utilizar dados oriundos de um banco de dados/servidor;
+- Esteja livre para melhorar e aperfeiçoar o código.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Créditos:
+- [Estilização no Styled Components](https://codesandbox.io/s/nwjmr73vl?file=/src/index.js:72-244)
+- [Breakpoints em CSS, do Tárcio Zemel](https://desenvolvimentoparaweb.com/css/css-breakpoints-maneira-correta/)
+- [Passagem de parâmetros em React.js](https://www.geeksforgeeks.org/how-to-pass-data-from-child-component-to-its-parent-in-reactjs/)
